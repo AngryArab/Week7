@@ -28,3 +28,53 @@ export function Get(req,res,next){
 
     });
 }
+
+
+export function Add(req,res, next){
+    let newMovie = new moviesModel({
+        ...req.body
+    });
+
+
+    moviesModel.create(newMovie, (err) =>{
+        if(err){
+            console.error(err);
+            res.end(err);
+        }
+   
+   
+        res.json({success: true, msg: 'succeeded', newMovie})
+   
+   
+    })
+
+
+
+}
+
+
+
+export function Edit(req,res,next){
+    let id = req.params.id;
+    
+    let updatedMovie = new moviesModel({
+        "_id": id,
+        ...req.body
+    });
+
+    moviesModel.updateOne({_id: id}, updatedMovie, (err)=>{
+        if(err){
+            console.error(err);
+            res.end(err);
+
+
+  
+        }
+  
+        res.json({success: true, msg: 'succeeded', newMovie});
+  
+  
+    })
+
+
+}
