@@ -1,4 +1,3 @@
-import movies from "../../views/content/models/movies.js";
 import moviesModel from "../../views/content/models/movies.js";
 
 export function GetList(req,res,next){
@@ -17,10 +16,15 @@ export function GetList(req,res,next){
 
 
 export function Get(req,res,next){
-    let id = req.param.id;
+    let id = req.params.id;
+
     moviesModel.findById(id,(err,movie)=>{
         if(err){
-            console.error
+            console.error(err);
+            res.end(err);
         }
-    })
+    
+        res.json({success: true, msg: 'succeeded', movie, user: req.user})
+
+    });
 }

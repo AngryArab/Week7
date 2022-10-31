@@ -22,7 +22,7 @@ export function GenerateToken(user){
         id: user._id,
         displayName: user.displayName,
         emailAddress: user.emailAddress
-    };
+    }
 
 //expiration
 
@@ -30,7 +30,7 @@ export function GenerateToken(user){
         expiresIn: 604800 //equivalant of 1 week
     }
 
-    jwt.sign(payload, Secret, jwtOptions);
+    return jwt.sign(payload, Secret, jwtOptions);
 
 
 
